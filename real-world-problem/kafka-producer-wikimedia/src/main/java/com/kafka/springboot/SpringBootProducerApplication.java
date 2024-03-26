@@ -1,10 +1,13 @@
 package com.kafka.springboot;
 
+import com.kafka.springboot.service.WikimediaChangesProducer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootProducerApplication {
+public class SpringBootProducerApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
 
@@ -13,4 +16,13 @@ public class SpringBootProducerApplication {
 
     }
 
+
+    @Autowired
+    private WikimediaChangesProducer wikimediaChangesProducer;
+
+
+    @Override
+    public void run(String... args) throws Exception {
+       wikimediaChangesProducer.sendMessage();
+    }
 }
